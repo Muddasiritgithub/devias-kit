@@ -32,6 +32,8 @@ const BasicModal = ({open,handleClose,handleSubmit}) => {
     MadeIn:"",
     Proccessor:"",
     Quantity: 0,
+    Category:"",
+    SubCategory:"",
   });
 
   const handleImageChange = (e) => {
@@ -62,6 +64,7 @@ const BasicModal = ({open,handleClose,handleSubmit}) => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        sx={{overflow:"scroll"}}
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -129,6 +132,16 @@ const BasicModal = ({open,handleClose,handleSubmit}) => {
                 margin="normal"
                 onChange={handleInputChange}
               />
+               <TextField
+                id="subCategory"
+                label="SubCategory"
+                variant="outlined"
+                name="SubCategory"
+                value={formData.SubCategory}
+                fullWidth
+                margin="normal"
+                onChange={handleInputChange}
+              />
             </Grid>
             <Grid item xs={6}>
               <TextField
@@ -181,6 +194,17 @@ const BasicModal = ({open,handleClose,handleSubmit}) => {
                 margin="normal"
                 onChange={handleInputChange}
               />
+              <TextField
+                id="category"
+                label="Category"
+                variant="outlined"
+                name="Category"
+                value={formData.Category}
+                fullWidth
+                margin="normal"
+                onChange={handleInputChange}
+              />
+               
               <input
                 style={{
                   padding: "15px",
@@ -192,7 +216,7 @@ const BasicModal = ({open,handleClose,handleSubmit}) => {
                />
             </Grid>
           </Grid>
-          <Button variant="outlined" onClick={onSubmit}>Save</Button>
+          <Button sx={{}} variant="outlined" onClick={onSubmit}>Save</Button>
         </Box>
       </Modal>
     </div>

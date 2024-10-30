@@ -24,6 +24,12 @@ import errorblack from '../../../public/Images/errorblack.svg';
 import logo from '../../../public/Images/logo.png';
 import Divider from '@mui/material/Divider';
 import deviaskitpro from '../../../public/Images/deviaskitpro.png'
+import orderwhite from '../../../public/Images/orderwhite.png'
+import orderblack from '../../../public/Images/orderblack.png'
+import product from '../../../public/Images/product.png'
+import productblack from '../../../public/Images/productblack.png'
+
+
 
 function Sidebar() {
   const path = usePathname();
@@ -120,7 +126,7 @@ function Sidebar() {
                 }}
               >
                 <Image
-                  src={path === '/ProductLayout' ? customerwhite : customerblack}
+                  src={path === '/ProductLayout' ? product : productblack}
                   width="32"
                   height="28"
                   alt="Customer Icon"
@@ -167,6 +173,7 @@ function Sidebar() {
               </ListItemButton>
             </ListItem>
           </Link>
+          
           <Link href="/AccountLayout" passHref style={{ textDecoration: 'none' }}>
             <ListItem disablePadding>
               <ListItemButton

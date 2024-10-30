@@ -17,12 +17,16 @@ const columns = [
   { field: 'MadeIn', headerName: 'Made In', width: 150 },
   { field: 'Proccessor', headerName: 'Proccessor', width: 150 }, // Make sure field name matches
   { field: 'Quantity', headerName: 'Quantity', width: 150 },
+  { field: 'Category', headerName: 'Category', width: 150 },
+  { field: 'SubCategory', headerName: 'SubCategory', width: 150 },
+
+
   { 
     field: 'Image',   
     headerName: 'Image', 
     width: 150,
     renderCell: (params) => (
-      <Image 
+      <img 
         src={params.value} 
         alt="Product" 
         width={50}
@@ -58,10 +62,13 @@ function DataTable() {
             MadeIn: item.MadeIn,
             Proccessor: item.Proccessor,
             Quantity: item.Quantity,
+            Category: item.Category,
+            SubCategory: item.SubCategory,
             Image: item.image
           }));
       console.log("Transformdata",transformedData)
           setRows(transformedData);
+          console.log("Rows",rows)
         } else {
           console.error('Expected an array for products, got:', typeof response.data.products);
           setError('Unexpected API response format');

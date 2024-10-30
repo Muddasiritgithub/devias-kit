@@ -9,12 +9,17 @@ import {
 import ProductDetails from "../../../src/Components/Common/ProductDetails/index.js";
 import Modal from "../../../src/Components/Common/Modal/index.js";
 import axios from "axios";
+import AddCategoryModel from "../../../src/Components/Common/AddCategoryModal/index.js";
 
 const Index = ({}) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [categoryModelOpen, setCategoryModelOpen] = useState(false);
 
   const handleOpenModal = () => setModalOpen(true);
   const handleCloseModal = () => setModalOpen(false);
+
+  const handleOpenModalCategory = () => setCategoryModelOpen(true);
+  const handleCloseModalCategory = () => setCategoryModelOpen(false);
 
   const handleSubmit = async (formData) => {
     console.log("formdata", formData);
@@ -31,10 +36,29 @@ const Index = ({}) => {
     data.append("MadeIn", formData.MadeIn);
     data.append("Proccessor", formData.Proccessor);
     data.append("Quantity", formData.Quantity);
+    data.append("Category", formData.Category);
+    data.append("SubCategory", formData.SubCategory);
 
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/products/createProduct`,
+        data
+      );
+      console.log("Response:", response.data.data);
+    } catch (error) {
+      console.error("Error uploading data:", error);
+    }
+  };
+  const handleCategorySubmit = async (formData) => {
+    console.log("formdata", formData);
+    const data = new FormData();
+    data.append("Name", formData.Name);
+    data.append("image", formData.image);
+    data.append("Discription", formData.Discription);
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/category/createCategory`,
         data
       );
       console.log("Response:", response.data.data);
@@ -115,6 +139,7 @@ const Index = ({}) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          alignItems: "center",
         }}
       >
         <Box
@@ -135,7 +160,7 @@ const Index = ({}) => {
           }}
         >
           <IconButton sx={{ p: "10px" }} aria-label="search">
-          <SearchIcon />
+            <SearchIcon />
           </IconButton>
           <InputBase
             placeholder="Search Product"
@@ -143,9 +168,25 @@ const Index = ({}) => {
             sx={{ ml: 1, flex: 1 }}
           />
         </Box>
-        <Button variant="contained" onClick={handleOpenModal}>
+        <Button
+          variant="contained"
+          onClick={handleOpenModal}
+          sx={{ width: "auto", height: "35px" }}
+        >
           Add Product
         </Button>
+        <Button
+          variant="contained"
+          onClick={handleOpenModalCategory}
+          sx={{ width: "auto", height: "35px" }}
+        >
+          Add Category
+        </Button>
+        <AddCategoryModel
+          open={categoryModelOpen}
+          handleClose={handleCloseModalCategory}
+          handleSubmit={handleCategorySubmit}
+        />
         {/* Modal Component */}
         <Modal
           open={modalOpen}
